@@ -13,7 +13,7 @@
 NAME		= philo
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -lpthread
 
 SRC			= 	srcs/init.c srcs/main.c srcs/operations.c \
 				srcs/checker.c srcs/utils.c \
@@ -25,7 +25,7 @@ INC			= includes
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I${INC}
 
 ${NAME} : ${OBJECT}
-	${CC} ${OBJECT} -o ${NAME}
+	${CC} ${OBJECT} -o ${NAME} 
 
 all : ${NAME}
 
