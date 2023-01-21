@@ -6,7 +6,7 @@
 /*   By: vmuller <vmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:53:19 by vmuller           #+#    #+#             */
-/*   Updated: 2023/01/21 16:09:28 by vmuller          ###   ########.fr       */
+/*   Updated: 2023/01/21 17:38:43 by vmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	eating(t_phil *philo)
 	print_state(philo, "is eating");
 	ft_usleep(philo->main->t_eat);
 	philo->eat_num++;
-	pthread_mutex_unlock(philo->right);
 	pthread_mutex_unlock(philo->left);
+	pthread_mutex_unlock(philo->right);
 }
 
 void	*philo_loop(void *job)
@@ -52,9 +52,9 @@ void	*philo_loop(void *job)
 	philo = (t_phil *)job;
 	while (!check_rdy(philo->main))
 		continue ;
-	if ((philo->tid & 1) == 0)
+	if ((philo->tid & 1) == 0 && philo->main->num_philo != 1)
 		ft_usleep(philo->main->t_eat * 0.9 + 1);
-	while (!check_over(philo->main))
+	while (!check_over(philo->main) && philo->main->num_philo != 1)
 	{
 		eating(philo);
 		sleep_think(philo);

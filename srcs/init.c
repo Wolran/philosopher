@@ -6,7 +6,7 @@
 /*   By: vmuller <vmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:58:19 by vmuller           #+#    #+#             */
-/*   Updated: 2023/01/21 16:14:05 by vmuller          ###   ########.fr       */
+/*   Updated: 2023/01/21 17:41:15 by vmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	init_thread(t_main *main, t_phil *philo)
 		philo[i].t_start = main->start;
 		philo[i].meal = main->start;
 	}
+	if (main->num_philo == 1)
+		print_state(philo, "has taken a fork");
 	pthread_mutex_lock(main->mutex_rdy);
 	main->ready = 1;
 	pthread_mutex_unlock(main->mutex_rdy);

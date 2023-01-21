@@ -6,7 +6,7 @@
 /*   By: vmuller <vmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 02:09:30 by vmuller           #+#    #+#             */
-/*   Updated: 2023/01/21 16:16:33 by vmuller          ###   ########.fr       */
+/*   Updated: 2023/01/21 17:30:42 by vmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	check_meal(t_phil philo, int idx)
 {
 	if (philo.main->chk_meal && idx == philo.main->num_philo - 1 && \
 	philo.eat_num == philo.main->must_eat)
-		return (usleep(50), 1);
+		return (usleep(300), 1);
 	return (0);
 }
 
