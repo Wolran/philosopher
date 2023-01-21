@@ -6,7 +6,7 @@
 /*   By: vmuller <vmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:53:19 by vmuller           #+#    #+#             */
-/*   Updated: 2023/01/16 08:46:25 by vmuller          ###   ########.fr       */
+/*   Updated: 2023/01/21 15:11:52 by vmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 void	print_state(t_phil *philo, char *str)
 {
 	pthread_mutex_lock(philo->main->death);
-	if (philo->main->over)
+	if (check_over(philo->main))
 	{
 		pthread_mutex_unlock(philo->main->death);
 		return ;
 	}
-	printf("%lldms %d %s\n", get_time() - philo->t_start, philo->tid, str);
+	printf("%lld %d %s\n", get_time() - philo->t_start, philo->tid, str);
 	pthread_mutex_unlock(philo->main->death);
 }
 
@@ -41,8 +41,8 @@ void	eating(t_phil *philo)
 	print_state(philo, "is eating");
 	ft_usleep(philo->main->t_eat);
 	philo->eat_num++;
-	pthread_mutex_unlock(philo->left);
 	pthread_mutex_unlock(philo->right);
+	pthread_mutex_unlock(philo->left);
 }
 
 void	*philo_loop(void *job)
@@ -50,11 +50,12 @@ void	*philo_loop(void *job)
 	t_phil	*philo;
 
 	philo = (t_phil *)job;
-	while (!philo->main->ready)
+
+	while (!check_rdy(philo->main))
 		continue ;
-	if (philo->tid % 2 == 0)
+	if ((philo->tid & 1) == 0)
 		ft_usleep(philo->main->t_eat * 0.9 + 1);
-	while (!philo->main->over)
+	while (!check_over(philo->main))
 	{
 		eating(philo);
 		sleep_think(philo);

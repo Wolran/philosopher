@@ -6,7 +6,7 @@
 /*   By: vmuller <vmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:53:50 by vmuller           #+#    #+#             */
-/*   Updated: 2023/01/16 09:31:13 by vmuller          ###   ########.fr       */
+/*   Updated: 2023/01/21 15:46:42 by vmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_usleep(int time)
 
 	start_time = get_time();
 	while ((get_time() - start_time) < time)
-		usleep(150);
+		usleep(50);
 	return (1);
 }
 
@@ -58,7 +58,7 @@ int	ft_atoi(const char *str)
 		j = j * 10 + (str[i] - '0');
 		i++;
 	}
-	if (j > MAX_INT || j < MIN_INT)
+	if (j > MAX_INT || j < MIN_INT || str[i])
 		ft_error_arg();
 	return ((int)j * n);
 }
@@ -73,6 +73,12 @@ int	error_free(char *str, t_main *main, t_phil *philo, int cnt)
 		pthread_mutex_destroy(main->death);
 		free(main->death);
 	}
+	pthread_mutex_destroy(main->mutex_rdy);
+	free(main->mutex_rdy);
+	pthread_mutex_destroy(main->mutex_over);
+	free(main->mutex_over);
+	pthread_mutex_destroy(main->mutex_die);
+	free(main->mutex_die);
 	if (main->num_philo > 0 && main->forks)
 	{
 		while (i < cnt)
