@@ -6,7 +6,7 @@
 /*   By: vmuller <vmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:53:50 by vmuller           #+#    #+#             */
-/*   Updated: 2023/01/21 15:46:42 by vmuller          ###   ########.fr       */
+/*   Updated: 2023/01/21 16:11:23 by vmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	error_free(char *str, t_main *main, t_phil *philo, int cnt)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	if (main->num_philo > 0 && main->death)
 	{
 		pthread_mutex_destroy(main->death);
@@ -81,11 +81,8 @@ int	error_free(char *str, t_main *main, t_phil *philo, int cnt)
 	free(main->mutex_die);
 	if (main->num_philo > 0 && main->forks)
 	{
-		while (i < cnt)
-		{
+		while (++i < cnt)
 			pthread_mutex_destroy(&main->forks[i]);
-			i++;
-		}
 		free(main->forks);
 	}
 	if (philo)

@@ -6,7 +6,7 @@
 /*   By: vmuller <vmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:53:19 by vmuller           #+#    #+#             */
-/*   Updated: 2023/01/21 15:11:52 by vmuller          ###   ########.fr       */
+/*   Updated: 2023/01/21 16:09:28 by vmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	*philo_loop(void *job)
 	t_phil	*philo;
 
 	philo = (t_phil *)job;
-
 	while (!check_rdy(philo->main))
 		continue ;
 	if ((philo->tid & 1) == 0)

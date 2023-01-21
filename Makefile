@@ -6,7 +6,7 @@
 #    By: vmuller <vmuller@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/13 04:19:36 by vmuller           #+#    #+#              #
-#    Updated: 2023/01/21 15:41:10 by vmuller          ###   ########.fr        #
+#    Updated: 2023/01/21 16:16:33 by vmuller          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -pthread -g3
 
 SRC			= 	srcs/init.c srcs/main.c srcs/operations.c \
-				srcs/checker.c srcs/utils.c \
+				srcs/checker.c srcs/utils.c srcs/end.c\
 
 OBJECT		= ${SRC:.c=.o}
 INC			= includes

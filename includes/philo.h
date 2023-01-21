@@ -6,7 +6,7 @@
 /*   By: vmuller <vmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:13:53 by vmuller           #+#    #+#             */
-/*   Updated: 2023/01/21 15:08:47 by vmuller          ###   ########.fr       */
+/*   Updated: 2023/01/21 16:16:13 by vmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ void		print_state(t_phil *philo, char *str);
 void		thread_end(t_main *main, t_phil *philo);
 int			check_rdy(t_main *main);
 int			check_over(t_main *main);
+int			philo_die(t_phil *philo);
 
 #endif

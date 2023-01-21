@@ -6,7 +6,7 @@
 /*   By: vmuller <vmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:58:19 by vmuller           #+#    #+#             */
-/*   Updated: 2023/01/21 15:43:54 by vmuller          ###   ########.fr       */
+/*   Updated: 2023/01/21 16:14:05 by vmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +67,14 @@ int	init_mutexes(t_main *main)
 	main->mutex_rdy = malloc(sizeof(pthread_mutex_t));
 	main->mutex_over = malloc(sizeof(pthread_mutex_t));
 	main->mutex_die = malloc(sizeof(pthread_mutex_t));
-	if (!main->death || !main->mutex_rdy || !main->mutex_over || !main->mutex_die)
+	main->forks = malloc(sizeof(pthread_mutex_t) * main->num_philo);
+	if (!main->death || !main->mutex_rdy || !main->mutex_over \
+	|| !main->mutex_die || !main->forks)
 		return (error_free("Error\n", main, 0, 0));
-	main->forks = malloc(sizeof(pthread_mutex_t) * \
-	main->num_philo);
-	if (!main->forks)
-		return (error_free("Error\n", main, 0, 0));
-	if (pthread_mutex_init(main->death, NULL) == -1)
-		return (error_free("Error\n", main, 0, 0));
-	if (pthread_mutex_init(main->mutex_rdy, NULL) == -1)
-		return (error_free("Error\n", main, 0, 0));
-	if (pthread_mutex_init(main->mutex_over, NULL) == -1)
-		return (error_free("Error\n", main, 0, 0));
-	if (pthread_mutex_init(main->mutex_die, NULL) == -1)
+	if (pthread_mutex_init(main->death, NULL) == -1 \
+	|| pthread_mutex_init(main->mutex_rdy, NULL) == -1 \
+	|| pthread_mutex_init(main->mutex_over, NULL) == -1 \
+	|| pthread_mutex_init(main->mutex_die, NULL) == -1)
 		return (error_free("Error\n", main, 0, 0));
 	while (++i < main->num_philo)
 	{
